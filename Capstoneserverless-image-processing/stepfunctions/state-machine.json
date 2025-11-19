@@ -4,7 +4,7 @@
   "States": {
     "ResizeTask": {
       "Type": "Task",
-      "Resource": "arn:aws:lambda:REGION:ACCOUNT_ID:function:CapstoneImageResizer",
+      "Resource": "arn:aws:lambda:us-east-1:153513258144:function:CapstoneImageResizer",
       "ResultPath": "$.result",
       "Next": "CheckResult"
     },
