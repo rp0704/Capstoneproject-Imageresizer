@@ -1,0 +1,30 @@
+{
+  "Comment": "Capstone Image Resize State Machine",
+  "StartAt": "ResizeTask",
+  "States": {
+    "ResizeTask": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:us-east-1:153513258144:function:CapstoneImageResizer",
+      "ResultPath": "$.result",
+      "Next": "CheckResult"
+    },
+    "CheckResult": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.result.success",
+          "BooleanEquals": true,
+          "Next": "SuccessState"
+        }
+      ],
+      "Default": "FailState"
+    },
+    "SuccessState": {
+      "Type": "Succeed"
+    },
+    "FailState": {
+      "Type": "Fail",
+      "Cause": "Image resize failed"
+    }
+  }
+}
